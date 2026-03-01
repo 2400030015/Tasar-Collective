@@ -261,6 +261,45 @@ export default function AuthPage() {
               </button>
             </p>
           </div>
+
+          {isLogin && (
+            <>
+              <div className="mt-8 flex items-center gap-3">
+                <div className="flex-1 h-px bg-tasar-brown/10" />
+                <span className="text-xs font-bold text-tasar-brown/40 uppercase">Or</span>
+                <div className="flex-1 h-px bg-tasar-brown/10" />
+              </div>
+
+              <div className="mt-6 space-y-3">
+                <p className="text-xs font-bold uppercase tracking-widest text-tasar-brown/40 mb-3">Continue as Guest</p>
+                
+                <div className="grid grid-cols-2 gap-3">
+                  <button 
+                    type="button"
+                    onClick={() => {
+                      localStorage.setItem('isAnonymous', 'true');
+                      localStorage.setItem('userRole', 'artisan');
+                      navigate('/dashboard');
+                    }}
+                    className="py-3 px-4 bg-tasar-ivory border-2 border-tasar-brown/20 rounded-xl hover:border-tasar-gold hover:bg-tasar-gold/10 transition-all text-sm font-bold text-tasar-brown"
+                  >
+                    Test as Artisan
+                  </button>
+                  <button 
+                    type="button"
+                    onClick={() => {
+                      localStorage.setItem('isAnonymous', 'true');
+                      localStorage.setItem('userRole', 'buyer');
+                      navigate('/buyer-dashboard');
+                    }}
+                    className="py-3 px-4 bg-tasar-ivory border-2 border-tasar-brown/20 rounded-xl hover:border-tasar-gold hover:bg-tasar-gold/10 transition-all text-sm font-bold text-tasar-brown"
+                  >
+                    Test as Buyer
+                  </button>
+                </div>
+              </div>
+            </>
+          )}
         </div>
       </motion.div>
     </div>
