@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", serif;
+  
+  --color-tasar-brown: #6B4423;
+  --color-tasar-gold: #C8A951;
+  --color-tasar-ivory: #F6F1E8;
+
+  --animate-spin-slow: spin 8s linear infinite;
+}
+
+@layer base {
+  body {
+    @apply bg-tasar-ivory text-tasar-brown font-sans antialiased;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+}
+
+.glass-card {
+  @apply bg-white/40 backdrop-blur-md border border-white/20 shadow-xl;
+}
+
+@layer utilities {
+  .btn-pill {
+    @apply rounded-full px-8 py-3 font-medium transition-all duration-300;
+  }
+
+  .btn-primary {
+    @apply rounded-full px-8 py-3 font-medium transition-all duration-300 bg-tasar-gold text-white hover:bg-tasar-brown hover:shadow-lg;
+  }
+
+  .btn-secondary {
+    @apply rounded-full px-8 py-3 font-medium transition-all duration-300 border-2 border-tasar-gold text-tasar-gold hover:bg-tasar-gold hover:text-white;
+  }
+}
