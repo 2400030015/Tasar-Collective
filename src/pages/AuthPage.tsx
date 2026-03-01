@@ -22,30 +22,34 @@ export default function AuthPage() {
     setError('');
 
     try {
-      const endpoint = isLogin ? '/api/auth/login' : '/api/auth/register';
-      const payload = isLogin 
-        ? { email, password } 
-        : { name, email, password, role, region, bio };
-
-      const response = await fetch(endpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Authentication failed');
-      }
+      // Simulate authentication delay
+      await new Promise(resolve => setTimeout(resolve, 1000));
 
       if (isLogin) {
-        localStorage.setItem('token', data.token);
-        localStorage.setItem('user', JSON.stringify(data.user));
-        navigate(data.user.role === 'artisan' ? '/dashboard' : '/buyer-dashboard');
+        // Demo login - accepts any email/password
+        if (email && password) {
+          const userData = {
+            id: Date.now().toString(),
+            name: email.split('@')[0],
+            email,
+            role: 'buyer' // Default role for demo
+          };
+          
+          localStorage.setItem('token', 'demo-token-' + Date.now());
+          localStorage.setItem('user', JSON.stringify(userData));
+          localStorage.setItem('isAnonymous', 'false');
+          navigate('/buyer-dashboard');
+        } else {
+          throw new Error('Please enter email and password');
+        }
       } else {
-        setIsLogin(true);
-        setError('Registration successful! Please login.');
+        // Demo registration
+        if (name && email && password) {
+          setIsLogin(true);
+          setError('Registration successful! Please login.');
+        } else {
+          throw new Error('Please fill all required fields');
+        }
       }
     } catch (err: any) {
       setError(err.message);
